@@ -42,6 +42,7 @@ export default function Penguin() {
     )
   },[])
   
+  let state = false;
 
   const deleteById = id =>{
 
@@ -49,10 +50,16 @@ export default function Penguin() {
     .then( () => {
       console.log("delete successful") 
       refresh();
+      state = true
+      while (state == true) {
+        console.log("a colao")
+        state = false;
+      }
     });
-
   }
-    
+
+
+
   return (
     <Box
       component="form"
@@ -104,3 +111,9 @@ export default function Penguin() {
     </Box>
   );
 }
+
+
+/* 
+En el then del edit habra que hacer los seters de cada parametro en los inputs de la antigua data y crear un boton que ejecute el update
+Update es hacer fetch con el metodo put pasandole un objeto penguin ya editado y un id como el delete
+*/
