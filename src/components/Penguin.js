@@ -13,13 +13,21 @@ export default function Penguin() {
         e.preventDefault()
         const penguin={nameSpecie,price,description}
         console.log(penguin)
+        fetch("http://localhost:8080/penguin/add",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(penguin)
+
+        }).then( () =>{
+          console.log("New Penguin added")
+        })
     }
+
+    
   return (
     <Box
       component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
+      sx= {{ '& > :not(style)': { m: 1, width: '25ch' },}}
       noValidate
       autoComplete="off"
     >
