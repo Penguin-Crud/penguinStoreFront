@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useEffect, useState} from 'react'; 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Container,Paper,Button} from '@material-ui/core';
@@ -8,6 +8,7 @@ export default function Penguin() {
     const[nameSpecie,setNameSpecie]=useState('')
     const[price,setPrice]=useState('')
     const[description,setDescription]=useState('')
+    const[penguins,setPenguins]=useState([])
 
     const handleClick=(e)=>{
         e.preventDefault()
@@ -23,6 +24,14 @@ export default function Penguin() {
         })
     }
 
+  useEffect(()=>{
+    fetch("http://localhost:8080/penguin/getAll")
+    .then(res=>res.json())
+    .then((result)=>{
+      setPenguins(result);
+    }
+    )
+  },[]) 
     
   return (
     <Box
@@ -48,6 +57,23 @@ export default function Penguin() {
 
                 <Button onClick={handleClick}>Submit</Button>
         </Paper>
+
+        <h1>Penguins</h1>
+
+        <Paper elevation={3} style={paperStyle}>
+
+          {penguins.map(penguin=>(
+            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={penguin.id}>
+
+              NameSpecie:{penguin.nameSpecie}<br/>
+              Price:{penguin.price}<br/>
+              Description:{penguin.description}
+
+            </Paper>
+          ))}
+
+        </Paper>
+
       </Container>
       
     </Box>
