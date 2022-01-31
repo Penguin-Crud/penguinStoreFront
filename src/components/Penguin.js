@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'; 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {Container,Paper,Button} from '@material-ui/core';
+import {Paper,Button} from '@material-ui/core';
 import Gif from '../assets/pinguino.gif'
-import { LaptopWindowsRounded } from '@material-ui/icons';
 
 export default function Penguin() {
   const paperStyle={padding:'50px 20px', width:600, margin:'20px Auto'}
@@ -61,13 +60,7 @@ export default function Penguin() {
 
 
   return (
-    <Box
-      component="form"
-      sx= {{ '& > :not(style)': { m: 1, width: '25ch' },}}
-      noValidate
-      autoComplete="off"
-    >
-      <Container >
+    <Box component="form" sx= {{ '& > :not(style)': { m: 1, width: '25ch' },}} noValidate autoComplete="off">
         <Paper elevation={3} style={paperStyle}>
                 <h1 style={{color:'blue'}}>Add Penguin</h1>
                 <TextField id="outlined-basic1" label="specie name" variant="outlined" fullWidth
@@ -82,32 +75,31 @@ export default function Penguin() {
                 value={description}
                 onChange={(e)=>setDescription(e.target.value)}/>
 
-                <Button variant="contained" color="secondary" onClick={handleClick}>Submit</Button>
+                <Button variant="contained" color="secondary" style={{ margin: '2%' }} onClick={handleClick}>Submit</Button>
         </Paper>
 
-        <h1>Penguins</h1>
-
-        <img src={Gif} alt="loading..." />
-
         <Paper elevation={3} style={paperStyle}>
+
+            <h1 style={{color:'blue'}}>Penguins</h1>
+
+            <img src={Gif} alt="loading..." />
 
           {penguins.map(penguin=>(
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={penguin.id}>
 
-              NameSpecie:{penguin.nameSpecie}<br/>
-              Price:{penguin.price}<br/>
-              Description:{penguin.description}
+              NameSpecie : {penguin.nameSpecie}<br/>
+              Price : {penguin.price}<br/>
+              Description : {penguin.description}
 
-              <Button variant="contained" color="primary" >Edit</Button>
-              <Button variant="contained" color="secondary" onClick={() => deleteById(penguin.id)}>Delete</Button>
+              <div className='divButton'>
+                <Button variant="contained" color="primary" style={{margin:"2%"}}>Edit</Button>
+                <Button variant="contained" color="secondary" style={{margin:"2%"}} onClick={() => deleteById(penguin.id)}>Delete</Button>
+              </div>
 
             </Paper>
           ))}
 
-        </Paper>
-
-      </Container>
-      
+        </Paper>  
     </Box>
   );
 }
