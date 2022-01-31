@@ -9,12 +9,12 @@ export default function Penguin() {
   const[nameSpecie,setNameSpecie]=useState('')
   const[price,setPrice]=useState('')
   const[description,setDescription]=useState('')
-  const[penguins,setPenguins]=useState([])
+  const[penguins,setPenguins]=useState([]) 
 
 
-  function refresh(){
-    window.location.reload(true);
-  }
+  // function refresh(){
+  //   window.location.reload(true);
+  // }
   
   const create = (e) =>{
       e.preventDefault() 
@@ -27,34 +27,34 @@ export default function Penguin() {
 
       }).then( () =>{
         console.log("New Penguin added")
-        refresh();
+        //refresh();
+        setPenguins([...penguins, penguin])
       })
 
   }
 
-  useEffect(()=>{
+  useEffect(() => {
+      setPenguins();
+      console.log(setPenguins())
+    },[]
+  )
+
+  setPenguins(()=>{
     fetch("http://localhost:8080/penguin/getAll")
     .then(res=>res.json())
     .then((result)=>{
-      setPenguins(result);
+      return [result];
     }
     )
-  },[])
-  
-  let state = false;
+  })
 
   const deleteById = id =>{
 
     fetch("http://localhost:8080/penguin/" + id, {method:"DELETE"})
     .then( () => {
-      console.log("delete successful") 
-      refresh();
-      state = true
-      while (state == true) {
-        console.log("a colao")
-        state = false;
-      }
-    });
+      console.log("delete successful");
+    })
+    .then(setPenguins())
   }
 
 
@@ -75,7 +75,7 @@ export default function Penguin() {
                 value={description}
                 onChange={(e)=>setDescription(e.target.value)}/>
 
-                <Button variant="contained" color="secondary" style={{ margin: '2%' }} onClick={handleClick}>Submit</Button>
+                <Button variant="contained" color="secondary" style={{ margin: '2%' }} onClick={create}>Submit</Button>
         </Paper>
 
         <Paper elevation={3} style={paperStyle}>
