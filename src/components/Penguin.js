@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Container,Paper,Button} from '@material-ui/core';
-import Gif from '../assets/pinguino.gif'
-import { LaptopWindowsRounded } from '@material-ui/icons';
+import Gif from '../assets/pinguino.gif';
 
 export default function Penguin() {
   const paperStyle={padding:'50px 20px', width:600, margin:'20px Auto'}
@@ -17,8 +16,8 @@ export default function Penguin() {
     window.location.reload(true);
   }
   
-  const handleClick = (e) =>{
-      e.preventDefault()
+  const create = (e) =>{
+      e.preventDefault() 
       const penguin={nameSpecie,price,description}
       console.log(penguin)
       fetch("http://localhost:8080/penguin/add",{
@@ -82,7 +81,7 @@ export default function Penguin() {
                 value={description}
                 onChange={(e)=>setDescription(e.target.value)}/>
 
-                <Button variant="contained" color="secondary" onClick={handleClick}>Submit</Button>
+                <Button variant="contained" color="secondary" onClick={create}>Submit</Button>
         </Paper>
 
         <h1>Penguins</h1>
