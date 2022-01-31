@@ -16,8 +16,8 @@ export default function Penguin() {
     window.location.reload(true);
   }
   
-  const handleClick = (e) =>{
-      e.preventDefault()
+  const create = (e) =>{
+      e.preventDefault() 
       const penguin={nameSpecie,price,description}
       console.log(penguin)
       fetch("http://localhost:8080/penguin/add",{

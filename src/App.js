@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import Appbar from './components/Appbar';
 import Penguin from './components/Penguin';
 
